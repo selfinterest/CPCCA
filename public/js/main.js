@@ -5,6 +5,7 @@ angular.module("CPCCA", ["ngResource"])
       .when("/", {
         templateUrl: "/api/template/index.html",
         controller: "IndexCtrl",
+        activate: "index",
         resolve: {
           "Document": ["$resource", function($resource){
             return $resource("/api/documents");
@@ -12,11 +13,14 @@ angular.module("CPCCA", ["ngResource"])
         }
       })
       .when("/about", {
+        activate: "about",
         template: "<div>Something something about.</div>"
       })
   }])
   .run(["$rootScope", function($rootScope){
-
+    $rootScope.$on("$routeChangeSuccess", function(e, $route){
+      $rootScope.activeRoute = $route.$$route.activate;
+    })
   }])
   .controller("IndexCtrl", ["$scope", "Document", function($scope, Document){
     var numDocumentsPerRow = 2;
