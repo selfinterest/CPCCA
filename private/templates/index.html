@@ -1,10 +1,11 @@
 <!-- Example row of columns -->
 <div class="row" ng-repeat="row in rows">
     <div class="col-lg-6" ng-repeat="document in row">
-        <div class="panel panel-primary">
-            <h2 class="panel-title">{{document.title}}</h2>
+        <div class="panel panel-primary" ng-class="{'panel-selected': document.filename == selected}">
+            <h2 id="{{document.filename}}" class="panel-title">{{document.title}}</h2>
             <div class="panel-body">
                 <p>{{document.description}}</p>
+                <a ng-href="/files/{{document.filename}}" class="pull-right"><span class="glyphicon glyphicon-file"> </span></a>
             </div>
         </div>
     </div>

@@ -31,8 +31,8 @@ $app->get("/api/template/:template", function($template) use ($app){
 
 $app->get("/api/documents", function() use ($app){
     $documents = array();
-    for($x = 0; $x < 10; $x++){
-        $documents[] = array("title" => "Document ".$x, "description" => "This is the description for document ".$x);
+    for($x = 0; $x < 25; $x++){
+        $documents[] = array("title" => "Document ".$x, "description" => "This is the description for document ".$x, "filename" => "document".$x.".pdf");
     }
 
     echo json_encode($documents);
