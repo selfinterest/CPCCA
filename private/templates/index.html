@@ -1,8 +1,12 @@
 <!-- Example row of columns -->
 <div class="row" ng-repeat="row in rows">
     <div class="col-lg-6" ng-repeat="document in row">
-        <h2>{{document.title}}</h2>
-        <p>{{document.description}}</p>
+        <div class="panel panel-primary">
+            <h2 class="panel-title">{{document.title}}</h2>
+            <div class="panel-body">
+                <p>{{document.description}}</p>
+            </div>
+        </div>
     </div>
     <!-- <div class="col-lg-4">
         <h2>Heading</h2>
