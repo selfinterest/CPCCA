@@ -29,8 +29,24 @@ body, html {
     line-height: 30px;
 }
 
+#inner-wrap {
+    /*padding-top: 10px;*/
+    /*background-color: #20829f;*/
+    /*background-image:url("/public/img/canadian-coat-of-arms-smaller.png");
+    background-repeat: repeat-x;*/
+}
+
+.wrapped {
+    background-color: #272b30;
+}
 
 
+#top {
+    background-image:url("/public/img/canadian-coat-of-arms-small.png");
+    background-repeat: no-repeat;
+    background-position: 50%;
+    background-size: 25%;
+}
 
 
 
