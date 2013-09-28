@@ -25,6 +25,18 @@ $app = new \Slim\Slim(array(
     //"view" => $haml
 ));
 
+$app->get("/api/template/:template", function($template) use ($app){
+    $app->render($template);
+});
+
+$app->get("/api/documents", function() use ($app){
+    $documents = array();
+    for($x = 0; $x < 10; $x++){
+        $documents[] = array("title" => "Document ".$x, "description" => "This is the description for document ".$x);
+    }
+
+    echo json_encode($documents);
+});
 
 $app->get("(.*)", function() use ($app){
     //$app->render("/public/index.html");
