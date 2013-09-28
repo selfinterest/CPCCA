@@ -44,14 +44,20 @@ body, html {
 #top {
     background-image:url("/public/img/canadian-coat-of-arms-small.png");
     background-repeat: no-repeat;
-    background-position: 50%;
+    background-position: 50% -90%;
     background-size: 25%;
 }
 
 
 
 
+.logo .img-responsive {
+    margin: 0 auto;
+}
 
+.centered {
+    margin: 0 auto;
+}
 
 
 
