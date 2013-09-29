@@ -3,8 +3,51 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "169caa67c89733e6e9c06c2689641df3",
+    "hash": "86bc286f3f6688ba05390d35fd02cb0a",
     "packages": [
+        {
+            "name": "gabordemooij/redbean",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/gabordemooij/redbean.git",
+                "reference": "2f4de433e6b16f5a03c67737930e4129d339dee3"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/gabordemooij/redbean/zipball/2f4de433e6b16f5a03c67737930e4129d339dee3",
+                "reference": "2f4de433e6b16f5a03c67737930e4129d339dee3",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.2.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "RedBean_": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD"
+            ],
+            "authors": [
+                {
+                    "name": "Gabor de Mooij",
+                    "email": "gabordemooij@gmail.com",
+                    "homepage": "http://www.redbeanphp.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Easy ORM for PHP",
+            "homepage": "http://github.com/gabordemooij/redbean",
+            "keywords": [
+                "Object Relational Mapping",
+                "orm"
+            ],
+            "time": "2013-09-28 12:22:52"
+        },
         {
             "name": "mthaml/mthaml",
             "version": "dev-master",
@@ -202,7 +245,8 @@
     "stability-flags": {
         "php-activerecord/php-activerecord": 20,
         "slim/extras": 20,
-        "mthaml/mthaml": 20
+        "mthaml/mthaml": 20,
+        "gabordemooij/redbean": 20
     },
     "platform": [
 

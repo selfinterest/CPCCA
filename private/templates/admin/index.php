@@ -27,7 +27,7 @@
                         <input ng-file-select type="file" multiple />
                     </div>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-7">
                     <a href="" class="btn btn-link btn-primary btn-sm dropdown-toggle" ng-show="uploader.queue.length > 0">Queue &uarr;</a>
                     <ul class="dropdown-menu bottom-up">
                         <li ng-repeat="item in uploader.queue">
@@ -42,6 +42,9 @@
                         </li>
                     </ul>
                     <button class="btn btn-sm btn-primary" ng-click="$event.preventDefault(); uploader.uploadAll()" ng-show="uploader.queue.length > 0"><span class="glyphicon glyphicon-upload"></span> Upload all</button>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-sm btn-primary" ng-click="logout()">Logout</button>
                 </div>
             </div>
         </div>

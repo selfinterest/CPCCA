@@ -12,12 +12,17 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
         templateUrl: "/api/admin/template/file.php",
         controller: "FileCtrl",
         resolve: {
-          "file": ["$resource", "$location", function($resource, $location){
-            return $resource("/api/admin/file/:name").get({name: $location.search().selected});
+          "file": ["resources", "$location", function(resources, $location){
+            return resources.file.get({name: $location.search().selected});
             //return $resource("/api/admin/file/:name").get($location.search().selected);
           }]
         }
       })
+  }])
+  .service("resources", ["$resource", function($resource){
+    return {
+      file: $resource("/api/admin/file/:name", {name: "@filename"})
+    }
   }])
   .controller("FooterCtrl", ["$scope", "$fileUploader", "$rootScope", function($scope, $fileUploader, $rootScope){
     var uploader = $fileUploader.create({
@@ -46,8 +51,28 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     $scope.$on("receivedFile", function(e, obj){
       $scope.files.push(obj.item.file.name);
     });
+
+
   }])
 
-  .controller("FileCtrl", ["$scope", "file", function($scope, file){
+  .controller("FileCtrl", ["$scope", "file", "$location", "resources", function($scope, file, $location, resources){
+    if(!angular.isDefined(file.filename)){
+      file.filename = $location.search().selected;
+    }
+
+    console.log(file);
+
     $scope.file = file;
+
+    var range = [];
+    for(var x = 1; x < 11; x++){
+      range.push(x);
+    }
+
+    $scope.range = range;
+
+    $scope.submit = function(){
+      $scope.file.$save();
+    }
+
   }])
