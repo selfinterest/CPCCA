@@ -4,6 +4,8 @@ ini_set('display_errors', 'On');
 require_once("private/vendor/autoload.php");
 session_start();
 
+$headPath = __DIR__ . "/private/templates/head.php";
+
 /* Initialize ActiveRecord */
 ActiveRecord\Config::initialize(function($cfg)
 {
@@ -25,6 +27,7 @@ $app = new \Slim\Slim(array(
     'templates.path' => 'private/templates',
     //"view" => $haml
 ));
+
 
 $app->get("/api/template/:template", function($template) use ($app){
     $app->render($template);
@@ -52,22 +55,22 @@ $app->post("/api/login", function() use ($app){
     }
 });
 
-$app->get("/login", function() use ($app){
-    $app->render("login.php", array("headPath" => "../head.php"));
+$app->get("/login", function() use ($app, $headPath){
+    $app->render("login.php", array("headPath" => $headPath));
 });
 
-$app->get("/admin", function() use ($app){
+$app->get("/admin", function() use ($app, $headPath){
     $isAdmin = isset($_SESSION["isAdmin"]) ? $_SESSION["isAdmin"] : false;
     if($isAdmin){
-        $app->render("admin/index.php", array("headPath" => __DIR__ . "/private/templates/head.php"));
+        $app->render("admin/index.php", array("headPath" => $headPath));
     } else {
         $app->redirect("/login");
     }
 });
 
-$app->get("(.*)", function() use ($app){
+$app->get("(.*)", function() use ($app, $headPath){
     //$app->render("/public/index.html");
-    $app->render("main.html", array("headPath" => "/private/head.php"));
+    $app->render("main.php", array("headPath" => $headPath));
 });
 
 $app->run();

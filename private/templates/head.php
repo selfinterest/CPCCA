@@ -31,4 +31,3 @@
     <link rel="stylesheet" href="/public/css/main.css">
 
     <script src="/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
-</head>
