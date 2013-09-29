@@ -2,6 +2,7 @@
 error_reporting(-1);
 ini_set('display_errors', 'On');
 require_once("private/vendor/autoload.php");
+session_start();
 
 /* Initialize ActiveRecord */
 ActiveRecord\Config::initialize(function($cfg)
@@ -38,9 +39,35 @@ $app->get("/api/documents", function() use ($app){
     echo json_encode($documents);
 });
 
+$app->post("/api/login", function() use ($app){
+    $email = isset($_POST["email"]) ? $_POST["email"] : null;
+    $password = isset($_POST["password"]) ? $_POST["password"] : null;
+
+    if(!$email || !$password){
+        $app->flash("message", "Invalid login");
+        $app->redirect("/login");
+    } else {    //TODO: need to actually check the username and password
+        $_SESSION["isAdmin"] = true;
+        $app->redirect("/admin");
+    }
+});
+
+$app->get("/login", function() use ($app){
+    $app->render("login.php", array("headPath" => "../head.php"));
+});
+
+$app->get("/admin", function() use ($app){
+    $isAdmin = isset($_SESSION["isAdmin"]) ? $_SESSION["isAdmin"] : false;
+    if($isAdmin){
+        $app->render("admin/index.php", array("headPath" => __DIR__ . "/private/templates/head.php"));
+    } else {
+        $app->redirect("/login");
+    }
+});
+
 $app->get("(.*)", function() use ($app){
     //$app->render("/public/index.html");
-    require("public/index.html");
+    $app->render("main.html", array("headPath" => "/private/head.php"));
 });
 
 $app->run();
