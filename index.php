@@ -28,6 +28,35 @@ $app = new \Slim\Slim(array(
     //"view" => $haml
 ));
 
+$app->post("/api/admin/upload", function() use ($app){
+    $file = $_FILES["file"];
+    try {
+        $file["name"] = preg_replace('/[\. ](?=.*\.)/', '', $file["name"]);
+        move_uploaded_file($file["tmp_name"], __DIR__ . "/public/files/".$file["name"]);
+        echo json_encode($file);
+    } catch (Exception $e){
+        echo json_encode($e);
+    }
+});
+
+$app->get("/api/admin/files", function() use ($app){
+    $handle = opendir(__DIR__ . "/public/files");
+    $files = array();
+    while (false !== ($entry = readdir($handle))) {
+        if($entry != ".." && $entry != ".") $files[] = $entry;
+    }
+    closedir($handle);
+    echo json_encode($files);
+});
+
+$app->get("/api/admin/file/:name", function() use ($app){
+    $file = array("title" => "Some title");
+    echo json_encode($file);
+});
+
+$app->get("/api/admin/template/:template", function($template) use($app){
+    $app->render("/admin/".$template);
+});
 
 $app->get("/api/template/:template", function($template) use ($app){
     $app->render($template);
@@ -59,7 +88,7 @@ $app->get("/login", function() use ($app, $headPath){
     $app->render("login.php", array("headPath" => $headPath));
 });
 
-$app->get("/admin", function() use ($app, $headPath){
+$app->get("/admin(\/?)(.*)", function() use ($app, $headPath){
     $isAdmin = isset($_SESSION["isAdmin"]) ? $_SESSION["isAdmin"] : false;
     if($isAdmin){
         $app->render("admin/index.php", array("headPath" => $headPath));

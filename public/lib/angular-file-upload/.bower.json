@@ -1,0 +1,15 @@
+{
+  "name": "angular-file-upload",
+  "homepage": "https://github.com/nervgh/angular-file-upload",
+  "version": "0.2.5",
+  "_release": "0.2.5",
+  "_resolution": {
+    "type": "version",
+    "tag": "v0.2.5",
+    "commit": "68cea03fea15e8b04d276dd30c373196ba732fa1"
+  },
+  "_source": "git://github.com/nervgh/angular-file-upload.git",
+  "_target": "~0.2.5",
+  "_originalSource": "angular-file-upload",
+  "_direct": true
+}
