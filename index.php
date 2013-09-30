@@ -2,6 +2,7 @@
 error_reporting(-1);
 ini_set('display_errors', 'On');
 require_once("private/vendor/autoload.php");
+require("private/vendor/PasswordHash.php");
 
 use RedBean_Facade as R;
 
@@ -14,7 +15,14 @@ R::setup($which["connection"], $which["username"], $which["password"]);
 session_start();
 
 $headPath = __DIR__ . "/private/templates/head.php";
+/*
+$user = R::dispense("user");
+$user->email = "parliamentaryterrence@gmail.com";
+$user->password = "stup3dxy";
 
+$hasher = new PasswordHash(8, false);
+$user->password = $hasher->HashPassword($user->password);
+R::store($user);*/
 /* Initialize ActiveRecord */
 /*ActiveRecord\Config::initialize(function($cfg)
 {
@@ -153,14 +161,39 @@ $app->post("/api/login", function() use ($app){
     if(!$email || !$password){
         $app->flash("message", "Invalid login");
         $app->redirect("/login");
-    } else {    //TODO: need to actually check the username and password
-        $_SESSION["isAdmin"] = true;
-        $app->redirect("/admin");
+    } else if (strlen($password) > 72) {
+        $app->flash("message", "Invalid login");
+        $app->redirect("/login");
+    } else {
+        $hasher = new PasswordHash(8, false);
+        $stored_hash = "*";
+        $user = R::findOne("user", " email = ?", array($email));
+        if(!$user){
+            $app->flash("message", "Invalid login");
+            $app->redirect("/login");
+        } else {
+            $stored_hash = $user->password;
+            $check = $hasher->CheckPassword($password, $stored_hash);
+            if($check){
+                $_SESSION["isAdmin"] = true;
+                $app->redirect("/admin");
+            } else {
+                $app->flash("message", "Invalid login");
+                $app->redirect("/login");
+            }
+        }
+
     }
 });
 
+
 $app->get("/login", function() use ($app, $headPath){
     $app->render("login.php", array("headPath" => $headPath));
+});
+
+$app->post("/api/logout", function() use($app){
+    unset($_SESSION["isAdmin"]);
+    echo "Logged out";
 });
 
 $app->get("/admin(\/?)(.*)", function() use ($app, $headPath){

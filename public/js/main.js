@@ -54,7 +54,7 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
     //$scope.documents = Document.query(function(documents){
     //Figure out rows. Each row has three columns (documents)
     $scope.rows = [];
-    $scope.numRows = Math.ceil(documents.length / numDocumentsPerRow);
+    $scope.numRows = Math.ceil(documents.length - 1 / numDocumentsPerRow);
 
     var documentCounter = 1;
 

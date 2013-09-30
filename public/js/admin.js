@@ -24,7 +24,7 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
       file: $resource("/api/admin/file/:name", {name: "@filename"})
     }
   }])
-  .controller("FooterCtrl", ["$scope", "$fileUploader", "$rootScope", function($scope, $fileUploader, $rootScope){
+  .controller("FooterCtrl", ["$scope", "$fileUploader", "$rootScope", "$http", "$window", function($scope, $fileUploader, $rootScope, $http, $window){
     var uploader = $fileUploader.create({
       scope: $scope,                          // to automatically update the html. Default: $rootScope
       url: '/api/admin/upload',
@@ -37,6 +37,12 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     });
 
     $scope.uploader = uploader;
+
+    $scope.logout = function(){
+      $http.post("/api/logout").success(function(){
+        $window.location.replace("/login");
+      })
+    }
 
   }])
   .controller("FilesCtrl", ["$scope", "$resource", "$http", "$location", function($scope, $resource, $http, $location){
@@ -69,7 +75,7 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
       file.filename = $location.search().selected;
     }
 
-    console.log(file);
+
 
     $scope.file = file;
 
