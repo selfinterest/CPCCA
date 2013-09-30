@@ -94,3 +94,6 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     }
 
   }])
+  .controller("UserCtrl", ["$scope", function($scope){
+
+  }])

@@ -15,6 +15,9 @@
                             <span class="glyphicon glyphicon-check pull-right" ng-show="file.db"> </span>
                         </a>
                     </div>
+                    <div class="list-group" ng-controller="UserCtrl">
+                        <div class="list-group-item-heading"><h4>Users</h4></div>
+                    </div>
                 </div>
                 <div ng-view class="col-md-8">
                     <h3></h3>

@@ -13,7 +13,7 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
       })
       .when("/about", {
         activate: "about",
-        template: "<div>Something something about.</div>",
+        templateUrl: "/api/template/about.php",
         title: "CPCCA | About"
       })
       .when("/contact", {

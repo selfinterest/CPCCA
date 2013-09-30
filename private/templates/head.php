@@ -36,5 +36,6 @@
     </style>
     <![endif]-->
     <link rel="stylesheet" href="/public/css/main.css">
-
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
     <script src="/public/js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
