@@ -8,10 +8,10 @@
  */
 ?>
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app" ng-app="CPCCA" xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ng-app" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9 ng-app" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js ng-app" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"><!--<![endif]-->
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7 ng-app:CPCCA" ng-app="CPCCA" xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8 ng-app:CPCCA" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9 ng-app:CPCCA" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js ng-app:CPCCA" ng-app="CPCCA"  xmlns:ng="http://angularjs.org" id="ng-app"><!--<![endif]-->
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">

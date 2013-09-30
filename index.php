@@ -6,11 +6,9 @@ require("private/vendor/PasswordHash.php");
 
 use RedBean_Facade as R;
 
-$development = array("connection" => 'mysql:host=localhost;dbname=antisemitism',
-        "username" => 'antis3mite', "password" => 'antis3mite');
-$which = $development;      //change on deployment
-
-R::setup($which["connection"], $which["username"], $which["password"]);
+require_once("private/config.php");
+$config = $configurations["local"];
+R::setup($config["connection"], $config["username"], $config["password"]);
 R::$writer->setUseCache(true);
 
 session_start();
@@ -26,6 +24,8 @@ $user->password = "stup3dxy";
 $hasher = new PasswordHash(8, false);
 $user->password = $hasher->HashPassword($user->password);
 R::store($user);*/
+
+
 /* Initialize ActiveRecord */
 /*ActiveRecord\Config::initialize(function($cfg)
 {
