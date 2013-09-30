@@ -59,9 +59,9 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
     //$scope.documents = Document.query(function(documents){
     //Figure out rows. Each row has three columns (documents)
     $scope.rows = [];
-    $scope.numRows = Math.ceil(documents.length - 1 / numDocumentsPerRow);
+    $scope.numRows = Math.ceil(documents.length / numDocumentsPerRow);      //We should -1 from the length if we want the primary document up top
 
-    var documentCounter = 1;
+    var documentCounter = 0;              //should be one if we want the top row single
 
     //The very first document is special. We give it its own item.
     $scope.primary = $scope.documents[0];

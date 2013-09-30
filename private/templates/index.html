@@ -1,4 +1,4 @@
-<div class="row">
+<!--<div class="row">
     <div class="col-lg-6 col-lg-offset-3">
         <div class="panel panel-primary gradient" ng-class="{'panel-selected': primary.filename == selected}">
             <h2 id="{{primary.filename}}" class="panel-title"><a ng-href="#{{primary.filename}}" ng-click="$event.preventDefault(); setSelected(primary.filename)">{{primary.title}}</a></h2>
@@ -8,7 +8,7 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 <div class="row" ng-repeat="row in rows">
     <div class="col-lg-6" ng-repeat="document in row">
         <div class="panel panel-primary gradient" ng-class="{'panel-selected': document.filename == selected}">
