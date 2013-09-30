@@ -52,10 +52,19 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
       $scope.files.push(obj.item.file.name);
     });
 
+    $scope.$on("fileSaved", function(e, obj){
+      $scope.files = _.map($scope.files, function(f){
+        if(obj.name == f.name){
+          f.db = true;
+        }
+        return f;
+      })
+    })
+
 
   }])
 
-  .controller("FileCtrl", ["$scope", "file", "$location", "resources", function($scope, file, $location, resources){
+  .controller("FileCtrl", ["$scope", "file", "$location", "resources", "$rootScope", function($scope, file, $location, resources, $rootScope){
     if(!angular.isDefined(file.filename)){
       file.filename = $location.search().selected;
     }
@@ -72,7 +81,9 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     $scope.range = range;
 
     $scope.submit = function(){
-      $scope.file.$save();
+      $scope.file.$save(function(){
+        $rootScope.$broadcast("fileSaved", {name: file.filename});
+      });
     }
 
   }])

@@ -56,8 +56,12 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
     $scope.rows = [];
     $scope.numRows = Math.ceil(documents.length / numDocumentsPerRow);
 
-    var documentCounter = 0;
-    for(var x = 0; x < $scope.numRows; x++){
+    var documentCounter = 1;
+
+    //The very first document is special. We give it its own item.
+    $scope.primary = $scope.documents[0];
+
+    for(var x = documentCounter; x < $scope.numRows; x++){
       if(documentCounter + numDocumentsPerRow < $scope.documents.length){
         $scope.rows.push($scope.documents.slice(documentCounter, documentCounter + numDocumentsPerRow))
       } else {

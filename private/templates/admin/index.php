@@ -10,7 +10,10 @@
                 <div class="col-md-4">
                     <div class="list-group" ng-controller="FilesCtrl">
                         <div class="list-group-item-heading"><h4>Files</h4></div>
-                        <a ng-repeat="file in files" ng-click="selected.name = file" ng-href="/admin/files?selected={{file}}" class="list-group-item" ng-class="{'active': selected.name == file }"><span class="glyphicon glyphicon-file"></span> {{file}}</a>
+                        <a ng-repeat="file in files" ng-click="selected.name = file.name" ng-href="/admin/files?selected={{file.name}}" class="list-group-item" ng-class="{'active': selected.name == file.name }">
+                            <span class="glyphicon glyphicon-file"></span> {{file.name}}
+                            <span class="glyphicon glyphicon-check pull-right" ng-show="file.db"> </span>
+                        </a>
                     </div>
                 </div>
                 <div ng-view class="col-md-8">
@@ -53,5 +56,6 @@
     <script src="/public/lib/angular-resource/angular-resource.min.js"></script>
     <script src="/public/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="/public/lib/angular-file-upload/js/angular/modules/files.js"></script>
+    <script src="/public/lib/underscore/underscore-min.js"></script>
     <script src="/public/js/admin.js"></script>
 </body>

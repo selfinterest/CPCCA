@@ -55,13 +55,39 @@ $app->post("/api/admin/upload", function() use ($app){
 });
 
 //Get the list of files
+function pluck($key, $data) {
+    return array_reduce($data, function($result, $array) use($key) {
+        isset($array[$key]) && $result[] = $array[$key];
+        return $result;
+    }, array());
+}
 $app->get("/api/admin/files", function() use ($app){
+
     $handle = opendir(__DIR__ . "/public/files");
     $files = array();
     while (false !== ($entry = readdir($handle))) {
         if($entry != ".." && $entry != ".") $files[] = $entry;
     }
     closedir($handle);
+    //Now cross reference
+    $ar = array_fill(0, count($files), "filename = ?");
+    $str = join(" OR ", $ar);
+    $documents = R::getAll("SELECT filename FROM document WHERE ".$str, $files );
+    $documents = pluck("filename", $documents);
+    $result = array();
+
+    $mapper = function($value) use ($documents){
+        if(in_array($value, $documents)){
+            $db = true;
+        } else {
+            $db = false;
+        }
+        return array("name" => $value, "db" => $db);
+    };
+
+    $files = array_map($mapper, $files);
+
+    //echo json_encode($documents);
     echo json_encode($files);
 });
 
@@ -110,8 +136,8 @@ $app->get("/api/documents", function() use ($app){
     for($x = 0; $x < 25; $x++){
         $documents[] = array("title" => "Document ".$x, "description" => "This is the description for document ".$x, "filename" => "document".$x.".pdf");
     }*/
-    $documents = R::getAll("select * from document");
-    echo json_encode($documents);
+    $documents = R::findAll("document", " ORDER BY `order` ASC");
+    echo json_encode(R::exportAll($documents));
 });
 
 /*$app->get("/api/document/filename/:name", function($name) use ($app){
