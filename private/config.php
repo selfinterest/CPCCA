@@ -8,6 +8,6 @@ $configurations = array(
     "remote" => array(
         "connection" => 'mysql:host=localhost;dbname=combatin_antisemitism',
         "username" => 'combatin_antisem',
-        "password" => "}Qvfh4I!XUDg"
+        "password" => "[l-&#tHBuPhG"
     )
 );
