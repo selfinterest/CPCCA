@@ -16,6 +16,11 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
         template: "<div>Something something about.</div>",
         title: "CPCCA | About"
       })
+      .when("/contact", {
+        template: "<div>Something something contact.</div>",
+        activate: "contact",
+        title: "CPCCA | Contact"
+      })
   }])
   .run(["$rootScope", function($rootScope){
 
@@ -69,10 +74,16 @@ angular.module("CPCCA", ["ngResource", "ui.bootstrap"])
       }
       documentCounter = documentCounter + numDocumentsPerRow;
     }
+
     $timeout(function(){
       $anchorScroll();
       $scope.selected = $location.hash();
-    })
+    });
+
+    $scope.setSelected = function(filename){
+      $scope.selected = filename;
+      $location.hash(filename);
+    }
 
 
     /*setTimeout(function(){

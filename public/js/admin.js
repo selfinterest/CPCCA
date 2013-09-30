@@ -55,7 +55,8 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     })
 
     $scope.$on("receivedFile", function(e, obj){
-      $scope.files.push({name: obj.item.file.name, db: false});
+      var newFile = angular.fromJson(obj.response);
+      $scope.files.push({name: newFile.name, db: false});
     });
 
     $scope.$on("fileSaved", function(e, obj){

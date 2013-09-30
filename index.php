@@ -11,6 +11,7 @@ $development = array("connection" => 'mysql:host=localhost;dbname=antisemitism',
 $which = $development;      //change on deployment
 
 R::setup($which["connection"], $which["username"], $which["password"]);
+R::$writer->setUseCache(true);
 
 session_start();
 

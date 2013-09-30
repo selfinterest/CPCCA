@@ -19,7 +19,7 @@
                     <ul class="nav navbar-nav">
                         <li ng-class="{active: active == 'index'}"><a href="/">Home</a></li>
                         <li ng-class="{active: active == 'about'}"><a href="/about">About</a></li>
-                        <li><a href="/contact">Contact</a></li>
+                        <li ng-class="{active: active == 'contact'}"><a href="/contact">Contact</a></li>
                         <li class="dropdown">
                             <a href="" class="dropdown-toggle" data-toggle="dropdown"><span class="glyphicon glyphicon-file"></span> Documents <b class="caret"></b></a>
                             <ul class="dropdown-menu">
@@ -49,14 +49,6 @@
             </div>
         </div>
 
-        <!-- Main jumbotron for a primary marketing message or call to action -->
-        <!-- <div class="jumbotron">
-            <div class="container">
-                <h1>Hello, world!</h1>
-                <p>This is a template for a simple marketing or informational website. It includes a large callout called the hero unit and three supporting pieces of content. Use it as a starting point to create something more unique.</p>
-                <p><a class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-            </div>
-        </div> -->
         <div class="container" ng-controller="JumbotronCtrl">
             <!-- <div class="pull-right"><button type="button" class="btn btn-default btn-sm" ng-click="minimize()">
                 <span class="glyphicon glyphicon-minus"></span>
