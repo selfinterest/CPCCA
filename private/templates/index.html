@@ -4,7 +4,7 @@
             <h2 id="{{primary.filename}}" class="panel-title">{{primary.title}}</h2>
             <div class="panel-body">
                 <p>{{primary.description}}</p>
-                <a ng-href="/public/files/{{document.filename}}" class="pull-right"><span class="glyphicon glyphicon-file"> </span></a>
+                <a ng-href="/api/files/{{primary.filename}}" class="pull-right" target="_blank"><span class="glyphicon glyphicon-file"> </span></a>
             </div>
         </div>
     </div>
@@ -15,7 +15,7 @@
             <h2 id="{{document.filename}}" class="panel-title">{{document.title}}</h2>
             <div class="panel-body">
                 <p>{{document.description}}</p>
-                <a ng-href="/public/files/{{document.filename}}" class="pull-right"><span class="glyphicon glyphicon-file"> </span></a>
+                <a ng-href="/api/files/{{document.filename}}" class="pull-right" target="_blank"><span class="glyphicon glyphicon-file"> </span></a>
             </div>
         </div>
     </div>

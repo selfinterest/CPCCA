@@ -15,6 +15,8 @@ R::setup($which["connection"], $which["username"], $which["password"]);
 session_start();
 
 $headPath = __DIR__ . "/private/templates/head.php";
+
+$filePath = __DIR__ . "/private/files";
 /*
 $user = R::dispense("user");
 $user->email = "parliamentaryterrence@gmail.com";
@@ -51,11 +53,11 @@ $app = new \Slim\Slim(array(
 $app->add(new AuthenticationMiddleware());
 
 //Uploads a file
-$app->post("/api/admin/upload", function() use ($app){
+$app->post("/api/admin/upload", function() use ($app, $filePath){
     $file = $_FILES["file"];
     try {
         $file["name"] = preg_replace('/[\. ](?=.*\.)/', '', $file["name"]);
-        move_uploaded_file($file["tmp_name"], __DIR__ . "/public/files/".$file["name"]);
+        move_uploaded_file($file["tmp_name"], $filePath . "/" . $file["name"]);
         echo json_encode($file);
     } catch (Exception $e){
         echo json_encode($e);
@@ -69,9 +71,9 @@ function pluck($key, $data) {
         return $result;
     }, array());
 }
-$app->get("/api/admin/files", function() use ($app){
+$app->get("/api/admin/files", function() use ($app, $filePath){
 
-    $handle = opendir(__DIR__ . "/public/files");
+    $handle = opendir($filePath);
     $files = array();
     while (false !== ($entry = readdir($handle))) {
         if($entry != ".." && $entry != ".") $files[] = $entry;
@@ -148,6 +150,25 @@ $app->get("/api/documents", function() use ($app){
     echo json_encode(R::exportAll($documents));
 });
 
+$app->get("/api/files/:name", function($name) use ($app, $filePath){
+    $fullPath = $filePath . "/" . $name;
+    if(file_exists($fullPath)){
+        $res = $app->response();
+        $res['Content-Description'] = 'File Transfer';
+        $res['Content-Type'] = 'application/octet-stream';
+        $res['Content-Disposition'] ='attachment; filename=' . basename($fullPath);
+        $res['Content-Transfer-Encoding'] = 'binary';
+        $res['Expires'] = '0';
+        $res['Cache-Control'] = 'must-revalidate';
+        $res['Pragma'] = 'public';
+        $res['Content-Length'] = filesize($fullPath);
+        readfile($fullPath);
+    } else {
+        $res = $app->response();
+        $res->status(404);
+        echo "File not found.";
+    }
+});
 /*$app->get("/api/document/filename/:name", function($name) use ($app){
     $document = R::findOne("Document", " filename = ?", array($name));
     if(!$document) $document = null;

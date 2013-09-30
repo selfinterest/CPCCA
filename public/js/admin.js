@@ -55,7 +55,7 @@ angular.module("CPCCA", ['files', 'ui.bootstrap', 'ngResource'])
     })
 
     $scope.$on("receivedFile", function(e, obj){
-      $scope.files.push(obj.item.file.name);
+      $scope.files.push({name: obj.item.file.name, db: false});
     });
 
     $scope.$on("fileSaved", function(e, obj){
