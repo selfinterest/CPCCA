@@ -69,11 +69,14 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="row">
-                        <div class="col-lg-3">
+                        <div class="col-lg-4">
                             <p class="lead text-muted text-center">Ottawa, Canada</p>
                         </div>
-                        <div class="col-lg-2 col-lg-offset-7">
+                        <div class="col-lg-4">
                             <p class="lead text-muted text-center">2011</p>
+                        </div>
+                        <div class="col-lg-4">
+                            <p class="lead text-center"><a href="/about#top">About</a></p>
                         </div>
                     </div>
                 </div>
